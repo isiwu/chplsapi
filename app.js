@@ -20,10 +20,8 @@ import transaction from "./routes/transactionpath.js";
 dotEnv.config();
 
 const app = express();
-const DB_URI =
-  "mongodb+srv://inmotion:validprofit@cluster0.wyb6yq6.mongodb.net/chpls_db?retryWrites=true&w=majority";
 mongoose
-  .connect(DB_URI, {
+  .connect(process.env.DB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
