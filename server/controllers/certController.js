@@ -1,8 +1,8 @@
 import { response } from "express";
-import Certificate from "../models/Certificate.js";
-import User from "../models/user.js";
+import Certificate from "../models/certificate";
+import User from "../models/user";
 import nodemailer from "nodemailer";
-import sendMails from "../models/email.js";
+import sendMails from "../models/email";
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 import fs from "fs";
 

@@ -1,9 +1,9 @@
 import path from "path";
-import User from "../models/user.js";
+import User from "../models/user";
 import bcrypt from "bcrypt";
 import randToken from "rand-token";
 // import nodemailer from "nodemailer";
-import sendMails from "../models/email.js";
+import sendMails from "../models/email";
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 import fs from "fs";
 //import Licentiate from "../models/memberships/licentiate.js";

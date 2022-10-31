@@ -1,4 +1,4 @@
-import Admin from "../models/Admin.js";
+import Admin from "../models/admin";
 import bcrypt from "bcrypt";
 
 const createAdmin = async (req, res) => {

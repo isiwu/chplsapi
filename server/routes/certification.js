@@ -6,7 +6,7 @@ import {
   getCertList,
   scheduleExam,
   verifyCertCode,
-} from "../controllers/certController.js";
+} from "../controllers/certController";
 const router = express.Router();
 
 router.post("/certification", certApplication);

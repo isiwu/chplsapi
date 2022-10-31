@@ -4,7 +4,7 @@ import {
   getAllTransactions,
   postTransaction,
   dashboardStat,
-} from "../controllers/transactionControl.js";
+} from "../controllers/transactionControl";
 const router = express.Router();
 
 router.get("/transactions", getAllTransactions);

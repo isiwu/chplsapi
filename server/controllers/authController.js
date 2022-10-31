@@ -1,10 +1,10 @@
-import User from "../models/user.js";
-import Certificate from "../models/Certificate.js";
+import User from "../models/user";
+import Certificate from "../models/certificate";
 import bcrypt from "bcrypt";
 import nodemailer from "nodemailer";
 // import sendpulse from "sendpulse-api";
-import Emailverify from "../models/emailverify.js";
-import sendMails from "../models/email.js";
+import Emailverify from "../models/emailverify";
+import sendMails from "../models/email";
 
 // login user_______________
 const LoginUser = async (req, res) => {

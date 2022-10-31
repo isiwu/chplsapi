@@ -1,6 +1,6 @@
+import "core-js/stable";
+import "regenerator-runtime/runtime";
 import express from "express";
-//import { join } from 'path';
-//import cookieParser from 'cookie-parser';
 import logger from "morgan";
 import cors from "cors";
 import session from "express-session";
@@ -9,13 +9,13 @@ import connectMongodbSession from "connect-mongodb-session";
 import dotEnv from "dotenv";
 import path from "path";
 //routes
-import indexRouter from "./routes/index.js";
-import usersRouter from "./routes/users.js";
-import adminRouter from "./routes/adminroutes.js"
-import login from "./routes/auth.js";
-import membershipList from "./routes/membershipLists.js";
-import certification from "./routes/certification.js";
-import transaction from "./routes/transactionpath.js";
+import indexRouter from "./routes/index";
+import usersRouter from "./routes/users";
+import adminRouter from "./routes/adminroutes"
+import login from "./routes/auth";
+import membershipList from "./routes/membershipLists";
+import certification from "./routes/certification";
+import transaction from "./routes/transactionpath";
 
 dotEnv.config();
 
@@ -37,7 +37,7 @@ mongoose.set("returnOriginal", false);
 const MongoDBStore = connectMongodbSession(session),
   store = new MongoDBStore(
     {
-      uri: DB_URI,
+      uri: process.env.DB_URI,
       databaseName: "test",
       collection: "session",
       expires: 1000 * 60 * 60,
@@ -79,18 +79,18 @@ const corsOptions = {
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static("public"));
-app.use(express.static("storage"));
+app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, '../storage')));
 app.use(cors(corsOptions));
 app.use(session(sessionOptions));
 // console.log(import.meta.url)
 // console.log(path.dirname(import.meta.url))
 //console.log(path.basename(path.dirname(import.meta.url)))
-app.use((req, res, next) => {
-  req._dirname = path.basename(path.dirname(import.meta.url));
+// app.use((req, res, next) => {
+//   req._dirname = path.basename(path.dirname(import.meta.url));
 
-  next();
-});
+//   next();
+// });
 //app.use(cors({ origin: process.env.REMOTE_CLIENT_APP, credentials: true }));
 //app.use(session(sessionOptions));
 

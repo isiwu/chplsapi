@@ -1,4 +1,4 @@
-import membershipLists from "../models/membershipLists.js";
+import membershipLists from "../models/membershipLists";
 
 const addMembership = async (req, res) => {
   const { membershipName, membershipPrice } = req.body;

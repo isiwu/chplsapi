@@ -3,7 +3,7 @@ import {
   addMembership,
   getMembership,
   updateMembership,
-} from "../controllers/mListController.js";
+} from "../controllers/mListController";
 
 const router = express.Router();
 

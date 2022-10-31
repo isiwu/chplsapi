@@ -1,6 +1,6 @@
-import user from "../models/user.js";
-import transaction from "../models/transaction.js";
-import certificate from "../models/Certificate.js";
+import user from "../models/user";
+import transaction from "../models/transaction";
+import certificate from "../models/certificate";
 
 const getAllTransactions = async (req, res) => {
   try {

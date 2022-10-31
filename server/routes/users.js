@@ -1,5 +1,5 @@
 import express from "express";
-import * as userControllers from "../controllers/userControllers.js";
+import * as userControllers from "../controllers/userControllers";
 import multer from "multer";
 import path from "path";
 //import { validateUser } from "../controllers/authController.js";
@@ -7,9 +7,7 @@ import path from "path";
 const router = express.Router();
 
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, `../${req._dirname}/storage/avatar`);
-  },
+  destination: "storage/avatar/",
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + path.extname(file.originalname);
     req.avatar = `${req.protocol}://${req.headers.host}/avatar/${file.fieldname}-${uniqueSuffix}`;
