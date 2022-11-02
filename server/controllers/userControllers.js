@@ -119,11 +119,19 @@ const CheckEmail = async (req, res, next) => {
     return next(error);
   }
 
+  let status, msg;
   if (userExist) {
-    res.status(200).json({ status: false, msg: "User already exists" });
+    status = false;
+    msg = "User already exists";
+    //res.status(200).json({ status: false, msg: "User already exists" });
   } else {
-    res.status(200).json({ status: true, msg: "welcome oga" });
+    status = true;
+    msg = "welcome oga";
+
+    //res.status(200).json({ status: true, msg: "welcome oga" });
   }
+
+  return res.status(200).json({status, msg});
 };
 
 //VALIDITY MEMBERSHIPS DETAIL
@@ -800,7 +808,7 @@ const approveMembership = async (req, res, next) => {
 
   user.timeline.memberships.push({type: membershipType, approvedAt: new Date(), expireAt: new Date().setFullYear(new Date().getFullYear + 2)});
   await user.save();
-  
+
   res.status(200).json({
     status: true,
     message: resMessage,

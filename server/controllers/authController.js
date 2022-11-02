@@ -78,7 +78,6 @@ const LoginUser = async (req, res) => {
         status: true,
         data: get_user,
       });
-      console.log("user => ", get_user)
     } else {
       return res.status(400).json({
         status: false,
