@@ -149,6 +149,34 @@ const userSchema = new Schema({
       },
     },
   ],
+  timeline: {
+    certs: [{
+      type: {
+        type: String
+      },
+      approvedAt: {
+        type: Date,
+        default: Date.now()
+      },
+      expireAt: {
+        type: Date,
+        default: Date.now()
+      }
+    }],
+    memberships: [{
+      type: {
+        type: String
+      },
+      approvedAt: {
+        type: Date,
+        default: Date.now()
+      },
+      expireAt: {
+        type: Date,
+        default: Date.now()
+      }
+    }]
+  },
   title: {
     type: String,
     default: null,

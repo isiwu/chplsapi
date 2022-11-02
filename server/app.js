@@ -81,7 +81,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.static(path.join(__dirname, '../storage')));
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(session(sessionOptions));
 // console.log(import.meta.url)
 // console.log(path.dirname(import.meta.url))

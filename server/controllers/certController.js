@@ -178,6 +178,7 @@ const approveCertificate = async (req, res) => {
         };
 
         user.certificates.push(newCertificate);
+        user.timelines.certs.push({type: cert.certificateType, approvedAt: Date.now(), expireAt: new Date().setFullYear(new Date.getFullYear() + 2)})
         await user.save();
       }
       generateCert().catch((err) => console.log(err));

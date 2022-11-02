@@ -43,7 +43,7 @@ const LoginUser = async (req, res) => {
       if (get_user.certified.CHLPS) {
         const today = new Date();
         const expiration = new Date(certifiedUserDetails?.expiredAt);
-        console.log("expire", certifiedUserDetails);
+        //console.log("expire", certifiedUserDetails);
         //compare the expiration date to the current date
         const compare = expiration - today;
 
@@ -78,6 +78,7 @@ const LoginUser = async (req, res) => {
         status: true,
         data: get_user,
       });
+      console.log("user => ", get_user)
     } else {
       return res.status(400).json({
         status: false,
