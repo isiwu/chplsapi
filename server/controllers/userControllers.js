@@ -293,42 +293,42 @@ const updateUserProfile = async (req, res, next) => {
       });
     }
     if (organization) {
-      updatedUser = await User.findOneAndUpdate(id, {
+      updatedUser = await User.findByIdAndUpdate(id, {
         $set: {
           organization,
         }
       });
     }
     if (firstName) {
-      updatedUser = await User.findOneAndUpdate(id, {
+      updatedUser = await User.findByIdAndUpdate(id, {
         $set: {
           firstName,
         }
       });
     }
     if (lastName) {
-      updatedUser = await User.findOneAndUpdate(id, {
+      updatedUser = await User.findByIdAndUpdate(id, {
         $set: {
           lastName,
         }
       });
     }
     if (address) {
-      updatedUser = await User.findOneAndUpdate(id, {
+      updatedUser = await User.findByIdAndUpdate(id, {
         $set: {
           address
         }
       });
     }
     if (speciality) {
-      updatedUser = await User.findOneAndUpdate(id, {
+      updatedUser = await User.findByIdAndUpdate(id, {
         $set: {
           speciality,
         }
       });
     }
     if (req.avatar) {
-      updatedUser = await User.findOneAndUpdate(id, {
+      updatedUser = await User.findByIdAndUpdate(id, {
         $set: {
           avatar: req.avatar,
         }
