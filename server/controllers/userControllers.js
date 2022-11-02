@@ -282,33 +282,58 @@ const updateUserProfile = async (req, res, next) => {
 
   try {
     // const userUpdate = await User.findOne({ id: id });
-    if (!userUpdate)
-      res.status(404).json({ status: false, message: "User not found" });
+    if (!userUpdate) return res.status(404).json({ status: false, message: "User not found" });
 
-    title !== undefined && title !== null ? (userUpdate.title = title) : null;
-    address !== undefined && address !== null
-      ? (userUpdate.address = address)
-      : null;
-
-    organization !== undefined && organization !== null
-      ? (userUpdate.organization = organization)
-      : null;
-    state !== undefined && state !== null ? (userUpdate.state = state) : null;
-
-    speciality !== undefined && speciality !== null
-      ? (userUpdate.speciality = speciality)
-      : null;
-    avatar !== undefined && avatar !== null
-      ? (userUpdate.avatar = avatar)
-      : null;
-    firstName !== undefined && firstName !== null
-      ? (userUpdate.firstName = firstName)
-      : null;
-    lastName !== undefined && lastName !== null
-      ? (userUpdate.lastName = lastName)
-      : null;
-
-    const updatedUser = await userUpdate.save();
+    let updatedUser;
+    if (title) {
+      updatedUser = await User.findOneAndUpdate(id, {
+        $set: {
+          title,
+        }
+      });
+    }
+    if (organization) {
+      updatedUser = await User.findOneAndUpdate(id, {
+        $set: {
+          organization,
+        }
+      });
+    }
+    if (firstName) {
+      updatedUser = await User.findOneAndUpdate(id, {
+        $set: {
+          firstName,
+        }
+      });
+    }
+    if (lastName) {
+      updatedUser = await User.findOneAndUpdate(id, {
+        $set: {
+          lastName,
+        }
+      });
+    }
+    if (address) {
+      updatedUser = await User.findOneAndUpdate(id, {
+        $set: {
+          address
+        }
+      });
+    }
+    if (speciality) {
+      updatedUser = await User.findOneAndUpdate(id, {
+        $set: {
+          speciality,
+        }
+      });
+    }
+    if (req.avatar) {
+      updatedUser = await User.findOneAndUpdate(id, {
+        $set: {
+          avatar: req.avatar,
+        }
+      });
+    }
     res.status(200).json({ status: true, data: updatedUser });
   } catch (err) {
     next(err);
