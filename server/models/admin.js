@@ -9,11 +9,6 @@ const adminSchema = new Schema({
   lastName: {
     type: String,
   },
-  role: {
-    type: String,
-    required: true,
-    options: ["Admin", "Super-Admin"],
-  },
   email: {
     type: String,
     required: true,
