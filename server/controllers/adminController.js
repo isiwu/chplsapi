@@ -2,21 +2,20 @@ import Admin from "../models/admin";
 import bcrypt from "bcrypt";
 
 const createAdmin = async (req, res) => {
-  const { firstName, lastName, email, password, role } = req.body;
+  const { firstName, lastName, email, password } = req.body;
 
   try {
-    if (!firstName || !lastName || !email || !password || !role) {
+    if (!firstName || !lastName || !email || !password ) {
       return res
         .status(400)
         .json({ status: false, message: "All fields are required" });
     }
-    const pass = await bcrypt.hash(password, 10);
+    const hashedPass = await bcrypt.hash(password, 10);
     const admin = await Admin.create({
       firstName,
       lastName,
       email,
-      password: pass,
-      role,
+      password: hashedPass,
     });
 
     res.status(201).json({ status: true, data: admin });
@@ -26,10 +25,10 @@ const createAdmin = async (req, res) => {
 };
 
 const loginAdmin = async (req, res) => {
-  const { email, password, role } = req.body;
+  const { email, password } = req.body;
 
   try {
-    if (!email || !password || !role) {
+    if (!email || !password) {
       return res
         .status(400)
         .json({ status: false, msg: "All fields are required" });
@@ -47,9 +46,9 @@ const loginAdmin = async (req, res) => {
         .json({ status: false, msg: "Invalid email or password" });
     }
 
-    if (role !== admin.role) {
-      return res.status(400).json({ status: false, msg: "Invalid role" });
-    }
+    // if (role !== admin.role) {
+    //   return res.status(400).json({ status: false, msg: "Invalid role" });
+    // }
 
     return res
       .status(200)

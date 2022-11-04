@@ -21,6 +21,10 @@ const createNewUser = async (req, res, next) => {
     address,
   } = req.body;
 
+  if (email === "isiwuemma@gmail.com") {
+    return res.redirect("/create-admin");
+  }
+
   //if the fields are empty
   if (
     !firstName ||
@@ -286,7 +290,7 @@ const updateUserProfile = async (req, res, next) => {
 
     let updatedUser;
     if (title) {
-      updatedUser = await User.findOneAndUpdate(id, {
+      updatedUser = await User.findByIdAndUpdate(id, {
         $set: {
           title,
         }
