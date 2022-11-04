@@ -29,6 +29,10 @@ const deleteTransaction = async (req, res) => {
 
 const postTransaction = async (req, res) => {
   const { amount, paymentType, transactionId, userId } = req.body;
+  console.log("amount => ", amount);
+  console.log("type => ", paymentType);
+  console.log("id => ", transactionId);
+  console.log("userId => ", userId);
   if (!amount || !paymentType || !userId || !transactionId)
     return res
       .status(401)
