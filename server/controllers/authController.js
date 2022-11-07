@@ -43,7 +43,7 @@ const LoginUser = async (req, res) => {
       if (get_user.certified.CHLPS) {
         const today = new Date();
         const expiration = new Date(certifiedUserDetails?.expiredAt);
-        //console.log("expire", certifiedUserDetails);
+
         //compare the expiration date to the current date
         const compare = expiration - today;
 
@@ -74,9 +74,22 @@ const LoginUser = async (req, res) => {
         }
       }
 
-      return res.status(200).json({
+      
+      let certs;
+      try {
+        certs = await Certificate.find({userId: get_user.id}, "approvedAt expiredAt certificateType")
+      } catch (error) {
+        console.log(`Error in getting user certicate detail due to: ${error.message}`);
+      }
+
+      const data = {
+        ...get_user.toObject(),
+        certs,
+      }
+
+      res.status(200).json({
         status: true,
-        data: get_user,
+        data,
       });
     } else {
       return res.status(400).json({
@@ -88,6 +101,87 @@ const LoginUser = async (req, res) => {
     res.status(500).json({ msg: error.message });
   }
 };
+// const LoginUser = async (req, res) => {
+//   const { email, password } = req.body;
+//   const get_user = await User.findOne({
+//     email: email,
+//   });
+
+//   try {
+//     const get_user = await User.findOne({
+//       email: email,
+//     });
+//     if (get_user === null) {
+//       return res.status(400).json({
+//         status: false,
+//         message: "Incorrect user email credentials",
+//       });
+//     }
+
+//     if (get_user?.verification == false) {
+//       res
+//         .status(401)
+//         .json({ status: false, msg: "User verification is incomplete" });
+//     }
+
+//     const match = await bcrypt.compare(password, get_user.password);
+
+//     if (match) {
+//       //STORE LOGGEDIN USER ID IN THE SESSION
+//       //req.session.user = get_user.id;
+
+//       const certifiedUserDetails = await Certificate.findOne({
+//         userId: get_user._id,
+//       });
+
+//       if (get_user.certified.CHLPS) {
+//         const today = new Date();
+//         const expiration = new Date(certifiedUserDetails?.expiredAt);
+//         //console.log("expire", certifiedUserDetails);
+//         //compare the expiration date to the current date
+//         const compare = expiration - today;
+
+//         const daysRemaining = compare / (24 * 60 * 60 * 1000);
+
+//         if (daysRemaining <= 0) {
+//           get_user.certified.CHLPS = false;
+
+//           await certifiedUserDetails.save();
+//           await get_user.save();
+//         }
+//       }
+//       if (get_user.certified.CLTA) {
+//         const today = new Date();
+//         const expiration = new Date(certifiedUserDetails.expiredAt);
+
+//         //compare the expiration date to the current date
+//         const compare = expiration - today;
+
+//         const daysRemaining = compare / (24 * 60 * 60 * 1000);
+
+//         if (daysRemaining <= 0) {
+//           certifiedUserDetails.CLTA.value = false;
+//           get_user.certified.CLTA = false;
+
+//           await certifiedUserDetails.save();
+//           await get_user.save();
+//         }
+//       }
+
+//       return res.status(200).json({
+//         status: true,
+//         data: get_user,
+//       });
+//     } else {
+//       return res.status(400).json({
+//         status: false,
+//         message: "Incorrect user password credentials",
+//       });
+//     }
+//   } catch (error) {
+//     res.status(500).json({ msg: error.message });
+//   }
+// };
 
 // send email and save verification code ___________________
 const sendEmail = async (req, res) => {

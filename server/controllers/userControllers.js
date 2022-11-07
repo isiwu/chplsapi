@@ -835,7 +835,7 @@ const approveMembership = async (req, res, next) => {
     console.log(`Error sending mail to user due to: ${error.message}`);
   }
 
-  user.timeline.memberships.push({type: membershipType, approvedAt: new Date(), expireAt: new Date().setFullYear(new Date().getFullYear + 2)});
+  user.timeline.memberships.push({type: membershipType, approvedAt: new Date(), expireAt: new Date().setFullYear(new Date().getFullYear() + 2)});
   await user.save();
 
   res.status(200).json({
